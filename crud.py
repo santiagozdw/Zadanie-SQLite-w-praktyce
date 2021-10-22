@@ -29,7 +29,7 @@ def create_todos_table(conn):
         id integer PRIMARY KEY,
         title text NOT NULL,
         description text,
-        done integer NOT NULL
+        done boolean NOT NULL
     );
     """
 
@@ -41,10 +41,10 @@ def create_todos_table(conn):
 
 
 
-def create_todo(conn, todo):
+def create_todo(conn, todo_title, todo_description, todo_done):
     sql = 'INSERT INTO todos(title, description, done) VALUES(?,?,?)'
     cur = conn.cursor()
-    cur.execute(sql, (todo.title, todo.description, todo.done))
+    cur.execute(sql, (todo_title, todo_description, todo_done))
     conn.commit()
     return cur.lastrowid
 
